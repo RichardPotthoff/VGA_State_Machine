@@ -38,7 +38,16 @@ for ic in range(3):
           
 im=Image.fromarray(obj=imgarr.astype(np.uint8),mode='RGB')
 z=[RGBto332(pixel) for pixel in imgarr.reshape(-1,3)]
+grayscaleImage=Image.new('L',(640,480))
+grayscaleImage.putdata(z)
+
+grayscaleImage.save('Starman.png')
+z=bytes(Image.open('Starman.png').getdata()) 
+
 imb=Image.new(mode='RGB',size=(640,480))
 for y in range(480):
   for x in range(640):
     imb.putpixel((x,y),b332toRGB(z[y*640+x]))
+    
+grayscaleImage.show()
+imb.show()
